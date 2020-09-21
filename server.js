@@ -3,14 +3,14 @@ const mongoose = require('mongoose')
 const app = express()
 const shortUrl = require('./models/shortUrl.js')
 const Users = require('./models/users.js')
-const url = 'mongodb://localhost:27017/node-mongo'
+const url = "mongodb+srv://new_user:pragati456@cluster0.xxmjo.mongodb.net/node-mongo?retryWrites=true&w=majority"
 const passport  = require('passport')
 const sessions = require('express-session')
 const flash = require('connect-flash')
 const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser')
 const LocalStrategy = require('passport-local').Strategy
-const connect = mongoose.connect(url)
+const connect = mongoose.connect(url,{ useNewUrlParser: true})
 var user;
 app.set('view engine','ejs')
 app.use(bodyParser.urlencoded({extended:true}))
@@ -182,6 +182,6 @@ app.get('/:shortUrl', async (req, res) => {
  
  
  
-app.listen(3000,()=>{
+app.listen(process.env || 3000,()=>{
    console.log('server started')
 })
